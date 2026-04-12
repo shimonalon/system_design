@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>muza4y — System Design Lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      padding: 1.5rem 1rem 4rem;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    header h1 span { color: #58a6ff; }
+
+    header p {
+      margin-top: 0.5rem;
+      color: #8b949e;
+      font-size: clamp(0.875rem, 3.5vw, 0.95rem);
+      line-height: 1.5;
+    }
+
+    .grid {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+      min-height: 56px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card:hover { border-color: #58a6ff; background: #1c2128; }
+    .card:active { background: #1c2128; border-color: #58a6ff; }
+
+    .card-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8b949e;
+      min-width: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: clamp(0.875rem, 3.5vw, 0.95rem);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-tags {
+      margin-top: 0.2rem;
+      font-size: clamp(0.72rem, 2.8vw, 0.78rem);
+      color: #8b949e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid;
+    }
+
+    .badge-wip  { color: #d29922; border-color: #d29922; background: #d2992215; }
+    .badge-done { color: #3fb950; border-color: #3fb950; background: #3fb95015; }
+    .badge-soon { color: #8b949e; border-color: #30363d;  background: transparent; }
+
+    footer {
+      max-width: 720px;
+      margin: 3rem auto 0;
+      font-size: 0.78rem;
+      color: #484f58;
+      border-top: 1px solid #21262d;
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>muza4y — <span>System Design Lab</span></h1>
+  <p>12 hands-on mini projects covering distributed systems, scalability, and real-world architecture.</p>
+</header>
+
+<main class="grid">
+
+  <a class="card" href="/p1">
+    <span class="card-num">01</span>
+    <div class="card-body">
+      <div class="card-title">URL Shortener</div>
+      <div class="card-tags">Hashing · REST API · Redis · PostgreSQL</div>
+    </div>
+    <span class="badge badge-wip">in progress</span>
+  </a>
+
+  <a class="card" href="/p2">
+    <span class="card-num">02</span>
+    <div class="card-body">
+      <div class="card-title">Rate Limiter</div>
+      <div class="card-tags">Token Bucket · Sliding Window · Redis</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p3">
+    <span class="card-num">03</span>
+    <div class="card-body">
+      <div class="card-title">Key-Value Store</div>
+      <div class="card-tags">In-memory · Storage Engines</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p4">
+    <span class="card-num">04</span>
+    <div class="card-body">
+      <div class="card-title">Task Queue / Job Scheduler</div>
+      <div class="card-tags">Message Queues · Workers · Async</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p5">
+    <span class="card-num">05</span>
+    <div class="card-body">
+      <div class="card-title">Notification System</div>
+      <div class="card-tags">Fan-out · Pub/Sub · Push vs Pull</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p6">
+    <span class="card-num">06</span>
+    <div class="card-body">
+      <div class="card-title">Leaderboard</div>
+      <div class="card-tags">Sorted Sets · Real-time · Redis</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p7">
+    <span class="card-num">07</span>
+    <div class="card-body">
+      <div class="card-title">Distributed Cache</div>
+      <div class="card-tags">Consistent Hashing · Eviction Policies</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p8">
+    <span class="card-num">08</span>
+    <div class="card-body">
+      <div class="card-title">Search Autocomplete</div>
+      <div class="card-tags">Trie · Indexing · Typeahead</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/p9">
+    <span class="card-num">09</span>
+    <div class="card-body">
+      <div class="card-title">Distributed File System</div>
+      <div class="card-tags">Replication · Fault Tolerance · Chunking</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/chat">
+    <span class="card-num">10</span>
+    <div class="card-body">
+      <div class="card-title">Chat System</div>
+      <div class="card-tags">WebSockets · Message Delivery · Presence</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/feed">
+    <span class="card-num">11</span>
+    <div class="card-body">
+      <div class="card-title">Feed System</div>
+      <div class="card-tags">Fan-out on Write/Read · Caching</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+  <a class="card" href="/video">
+    <span class="card-num">12</span>
+    <div class="card-body">
+      <div class="card-title">Video Upload &amp; Streaming</div>
+      <div class="card-tags">CDN · Chunked Upload · Encoding Pipeline</div>
+    </div>
+    <span class="badge badge-soon">soon</span>
+  </a>
+
+</main>
+
+<footer>
+  Shimon Alon the king &mdash; system design lab &mdash; 2026
+</footer>
+
+</body>
+</html>
