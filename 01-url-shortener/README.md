@@ -5,50 +5,90 @@ Design a URL shortening service like bit.ly that converts long URLs into short, 
 
 ---
 
-## ✅ Functional Requirements
-- Given a long URL, generate a short unique URL (e.g. `short.ly/aB3xQ`)
-- Redirect user to the original URL when the short URL is accessed
-- Short codes must be unique and collision-free
-- Custom aliases: user can request a specific short code
-- URL expiration: URLs can have an optional TTL after which they return 404
-- Basic analytics: track how many times a short URL was clicked
-
-## 🚫 Non-Functional Requirements
-- **Availability**: 99.99% uptime (redirects must always work)
-- **Latency**: redirect must complete in < 10ms (cache hit) / < 50ms (cache miss)
-- **Scalability**: support 100M stored URLs, 4000 redirects/sec
-- **Durability**: no URL should be silently lost
-- **Security**: prevent abuse (malicious URL submission)
+## ✅ MVP Requirements
+- Generate short unique URLs from long URLs
+- Redirect short URLs to originals
+- Ensure collision-free short codes
+- Track click counts
 
 ---
 
-## 🔢 Estimations
-- Read/Write ratio: 100:1
-- 100M new URLs/month → ~40 writes/sec
-- 10B redirects/month → ~4000 reads/sec
-- Storage: avg URL = 500 bytes → 100M × 500B = ~50GB
+## 📁 Project Structure
+
+```
+01-url-shortener/
+├── DESIGN.md                    ← System architecture
+├── README.md                    ← This file
+├── .gitignore
+│
+├── backend/                     ← Python + FastAPI
+│   ├── src/                     ← Application code
+│   ├── tests/                   ← Unit & integration tests
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── .env.example
+│   ├── pytest.ini
+│   └── SETUP.md                 ← Start here!
+│
+└── frontend/                    ← TypeScript + React (Phase 5)
+    ├── src/
+    ├── public/
+    ├── package.json
+    ├── vite.config.ts
+    ├── Dockerfile
+    ├── .env.example
+    └── SETUP.md
+```
 
 ---
 
-## 🛠️ Recommended Tech Stack
+## 🛠️ Tech Stack
 
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| **API Server** | **Python** (FastAPI) | You know Python; FastAPI is async & great for REST APIs |
-| **Database** | **PostgreSQL** | Practice SQL — store URLs, aliases, expiry |
-| **Cache** | **Redis** | Key-value store for short_code → long_url lookup |
-| **ID Generation** | Python (Base62 encode) | Simple to implement yourself |
-| **Stretch goal** | **TypeScript** (Node/Express) | Re-implement the API layer in TS for practice |
-
-### What you'll learn:
-- Writing SQL schemas, indexes, constraints
-- Redis `SET`/`GET`/`EXPIRE` commands
-- REST API design with FastAPI
-- HTTP 301 vs 302 redirects
+| Component | Technology |
+|-----------|-----------|
+| API | Python + FastAPI |
+| Database | PostgreSQL |
+| Cache | Redis |
+| Frontend | TypeScript + React + Vite (Phase 5) |
 
 ---
 
-## 🔗 Resources
-- [DESIGN.md](./DESIGN.md) — Architecture & decisions
-- `diagrams/` — Architecture diagrams
-- `src/` — Implementation
+## 📚 Documentation
+
+- **[DESIGN.md](./DESIGN.md)** — System design & algorithms
+- **[PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md)** — How files are organized
+- **[backend/SETUP.md](./backend/SETUP.md)** — Backend setup & implementation
+- **[frontend/SETUP.md](./frontend/SETUP.md)** — Frontend setup (Phase 5)
+
+---
+
+## 🎯 Implementation Phases
+
+| Phase | Status | Deliverable |
+|-------|--------|-------------|
+| **1. Design** | ✅ Done | [DESIGN.md](./DESIGN.md) |
+| **2. Setup** | ✅ Done | Scaffolding + function declarations |
+| **3. Implementation** | 🚀 Next | Implement backend functions |
+| **4. Testing** | ⏳ Later | Unit + integration tests |
+| **5. Frontend** | ⏳ Later | React UI (stretch goal) |
+
+---
+
+## 🚀 Getting Started
+
+1. **Read the design**: `DESIGN.md`
+2. **Go to backend**: `cd backend && cat SETUP.md`
+3. **Implement functions**: Follow the TODO comments
+4. **Run tests**: `pytest`
+5. **Start server**: `uvicorn src.main:app --reload`
+
+---
+
+## ✅ Success Criteria
+
+- ✅ Short URL generation works
+- ✅ Redirects work (< 50ms)
+- ✅ Click tracking works
+- ✅ No collisions
+- ✅ Tests passing
+- ✅ Can run with Docker
