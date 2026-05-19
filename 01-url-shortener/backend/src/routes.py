@@ -13,6 +13,7 @@ from src.config import get_settings
 from fastapi.responses import RedirectResponse
 
 router = APIRouter(prefix="/api", tags=["urls"])
+redirect_router = APIRouter(tags=["redirect"])
 
 
 @router.post("/shorten", response_model=ShortenResponse, status_code=status.HTTP_201_CREATED)
@@ -50,7 +51,7 @@ async def shorten_url(
     )
 
 
-@router.get("/{short_code}", status_code=status.HTTP_302_FOUND)
+@redirect_router.get("/{short_code}", status_code=status.HTTP_302_FOUND)
 async def redirect_to_url(
     short_code: str,
     session: Session = Depends(get_db().get_session),
@@ -110,7 +111,7 @@ async def get_stats(
     )
 
 
-@router.delete("/{short_code}", status_code=status.HTTP_204_NO_CONTENT)
+@redirect_router.delete("/{short_code}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_url(
     short_code: str,
     session: Session = Depends(get_db().get_session),

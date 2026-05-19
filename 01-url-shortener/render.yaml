@@ -13,10 +13,7 @@ services:
           name: url-shortener-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          name: url-shortener-redis
-          type: redis
-          property: connectionString
+        sync: false   # Set manually: create free Redis at https://upstash.com → copy URL here
       - key: BASE_URL
         sync: false   # Set manually in Render dashboard
       - key: DEBUG

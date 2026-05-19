@@ -8,7 +8,7 @@ import logging
 from src.config import get_settings
 from src.database import get_db
 from src.cache import get_cache
-from src.routes import router
+from src.routes import router, redirect_router
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -72,6 +72,7 @@ def create_app() -> FastAPI:
     
     # Include routes
     app.include_router(router)
+    app.include_router(redirect_router)
     
     # Health check endpoint
     @app.get("/health")

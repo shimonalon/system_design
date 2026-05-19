@@ -1,0 +1,127 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+header {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+header p  { font-size: 1.1rem; opacity: 0.9; }
+
+main {
+  flex: 1;
+  padding: 3rem 2rem;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+input[type='url'] {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+input[type='url']:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+button {
+  padding: 0.75rem 1.25rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button:hover:not(:disabled) { background: #1e40af; }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.result {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.result p { color: #6b7280; margin-bottom: 0.75rem; }
+
+.short-url-box {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  background: #f3f4f6;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.short-url-box a {
+  flex: 1;
+  color: #3b82f6;
+  font-weight: 500;
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.short-url-box a:hover { text-decoration: underline; }
+
+.short-url-box button {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+.stats {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stats h3 { margin-bottom: 1rem; color: #374151; }
+
+.stats table { width: 100%; border-collapse: collapse; }
+
+.stats td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.stats td:first-child { color: #6b7280; width: 30%; }
+
+.stats a { color: #3b82f6; }
+
+@media (max-width: 640px) {
+  form { flex-direction: column; }
+  header h1 { font-size: 1.75rem; }
+}
