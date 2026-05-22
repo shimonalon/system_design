@@ -2,9 +2,10 @@ services:
   # Backend API
   - type: web
     name: url-shortener-api
-    runtime: docker
-    dockerfilePath: ./01-url-shortener/backend/Dockerfile
-    dockerContext: ./01-url-shortener/backend
+    runtime: python
+    buildCommand: "pip install -r 01-url-shortener/backend/requirements.txt"
+    startCommand: "uvicorn src.main:app --host 0.0.0.0 --port $PORT"
+    rootDir: 01-url-shortener/backend
     plan: free
     healthCheckPath: /health
     envVars:
