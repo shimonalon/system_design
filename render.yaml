@@ -1,11 +1,37 @@
 services:
-  # Backend API
+  # ─────────────────────────────────────────
+  # Main landing page (static site)
+  # ─────────────────────────────────────────
+  - type: web
+    name: system-design-lab
+    runtime: static
+    staticPublishPath: ./public
+    plan: free
+    routes:
+      - type: rewrite
+        source: /p1
+        destination: https://url-shortener-ui.onrender.com
+
+  # ─────────────────────────────────────────
+  # Project 01 — URL Shortener Frontend
+  # ─────────────────────────────────────────
+  - type: web
+    name: url-shortener-ui
+    runtime: static
+    rootDir: 01-url-shortener/frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    plan: free
+
+  # ─────────────────────────────────────────
+  # Project 01 — URL Shortener Backend API
+  # ─────────────────────────────────────────
   - type: web
     name: url-shortener-api
     runtime: python
-    buildCommand: "pip install -r 01-url-shortener/backend/requirements.txt"
-    startCommand: "uvicorn src.main:app --host 0.0.0.0 --port $PORT"
     rootDir: 01-url-shortener/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /health
     envVars:
@@ -14,9 +40,9 @@ services:
           name: url-shortener-db
           property: connectionString
       - key: REDIS_URL
-        sync: false   # Set manually: create free Redis at https://upstash.com → copy URL here
+        sync: false   # Set manually: create free Redis at https://upstash.com
       - key: BASE_URL
-        sync: false   # Set manually in Render dashboard
+        value: https://url-shortener-api.onrender.com
       - key: DEBUG
         value: "False"
       - key: CACHE_TTL
@@ -27,14 +53,8 @@ services:
         value: "8000"
 
 databases:
-  # PostgreSQL
+  # PostgreSQL for URL Shortener
   - name: url-shortener-db
     databaseName: url_shortener
     user: url_shortener_user
     plan: free
-
-  # Redis (Render does not support Redis in Blueprints on free plan)
-  # You'll need to create Redis manually:
-  # 1. Go to Render Dashboard → New → Redis
-  # 2. Copy the Internal URL
-  # 3. Set REDIS_URL in your web service environment
