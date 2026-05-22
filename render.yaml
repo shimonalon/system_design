@@ -42,7 +42,7 @@ services:
       - key: REDIS_URL
         sync: false   # Set manually: create free Redis at https://upstash.com
       - key: BASE_URL
-        value: https://url-shortener-api.onrender.com
+        sync: false   # Set manually after deploy: https://<your-service-name>.onrender.com
       - key: DEBUG
         value: "False"
       - key: CACHE_TTL
