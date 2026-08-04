@@ -108,10 +108,13 @@
       display: block;
       width: 100%;
       font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-      color: #6b7280;
+      color: #374151;
+      font-weight: 600;
+      line-height: 1.2;
       min-height: 2rem;
       direction: rtl;
       text-align: center;
+      word-break: break-word;
     }
 
     .day-note.is-question {
@@ -132,11 +135,17 @@
 
     @media (max-width: 700px) {
       .day {
-        min-height: 68px;
+        min-height: 78px;
+        padding: 0.28rem;
       }
 
       .day-note {
-        display: none;
+        font-size: 0.8rem;
+        min-height: 1.55rem;
+      }
+
+      .day-number {
+        margin-bottom: 0.25rem;
       }
     }
   </style>
