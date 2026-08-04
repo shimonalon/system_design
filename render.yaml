@@ -10,6 +10,9 @@ services:
       - type: rewrite
         source: /p1
         destination: https://url-shortener-ui.onrender.com
+      - type: rewrite
+        source: /summer
+        destination: /summer/index.html
 
   # ─────────────────────────────────────────
   # Project 01 — URL Shortener Frontend
